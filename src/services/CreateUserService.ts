@@ -2,6 +2,7 @@ import { getCustomRepository } from 'typeorm';
 import { UsersRepositories } from '../repositories/UsersRepositories';
 import { convertToTimeZone } from 'date-fns-timezone';
 import { listTimeZones } from 'timezone-support';
+import {hash} from "bcryptjs";
 
 interface IUserRequest {
   name: string;
@@ -52,10 +53,12 @@ class CreateUserService {
       throw new Error('User Already Exists');
     }
 
+    const passwordHash = await hash(password, 8);
+
     const user = userRepository.create({
       name,
       email,
-      password,
+      password: passwordHash,
       country,
       timezone,
       admin,
