@@ -66,7 +66,7 @@ class CreateUserService {
       about,
     });
 
-    // await userRepository.save(user)
+    await userRepository.save(user)
 
     //net to save in the database;
 

@@ -8,6 +8,8 @@ class CreateUserController {
 
     const createUserService = new CreateUserService();
     const user = await createUserService.execute({ name, email, password, country, timezone, admin, avatar,about })
+
+    delete user.password;
     return response.json(user);
   }
 

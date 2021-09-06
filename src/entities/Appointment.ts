@@ -6,6 +6,8 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 import { User } from '../entities/User';
@@ -15,6 +17,9 @@ class Appointment {
   @PrimaryColumn()
   readonly id: string;
 
+  @Column()
+  provider_id: string;
+
   @ManyToOne(() => User)
   @JoinColumn({ name: 'provider_id' })
   provider: User;
@@ -23,8 +28,8 @@ class Appointment {
   student_id: string;
 
   @ManyToOne(() => User)
-  @JoinColumn({ name: 'student_id' })
-  user: User;
+  @JoinColumn({ name: 'student_id' }, )
+  student: User;
 
   @Column('time with time zone')
   date: Date;

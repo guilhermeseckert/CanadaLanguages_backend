@@ -59,7 +59,7 @@ export class Posts1630389917261 implements MigrationInterface {
       await queryRunner.createForeignKey(
         'posts',
         new TableForeignKey({
-          name: 'User_Post',
+          name: 'user_Post',
           columnNames: ['user_id'],
           referencedColumnNames: ['id'],
           referencedTableName: 'users',

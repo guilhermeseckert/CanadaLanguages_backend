@@ -28,7 +28,7 @@ class AuthenticateUserService {
       {
         email: user.email,
       },
-      'f1c7778fff2e1484ea42ba4e127d8551',
+      process.env.WEB_TOKEN,
       {
         subject: user.id,
         expiresIn: '1d',
