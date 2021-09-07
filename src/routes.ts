@@ -2,7 +2,7 @@ import {Router} from "express"
 import { AuthenticateUserController } from "./controllers/AuthenticateUserController";
 import  {CreateUserController } from "./controllers/CreateUserController"
 import {CreateAppointmentController} from './controllers/CreateAppointmentController'
-import {FindAppointmentController} from './controllers/findAppointmentController';
+import {FindAppointmentController} from './controllers/FindAppointmentController';
 import {ensureAdmin} from "./middlewares/ensureAdmin";
 
 const router = Router();

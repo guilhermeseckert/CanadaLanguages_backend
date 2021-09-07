@@ -38,7 +38,7 @@ class Post {
   @CreateDateColumn()
   created_at: Date;
 
-  @OneToMany(() => User, user => user)
+  @OneToMany(() => User, user => user )
   user: User[];
 
   constructor() {

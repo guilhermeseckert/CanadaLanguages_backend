@@ -4,15 +4,18 @@ import { convertToTimeZone } from 'date-fns-timezone';
 import { listTimeZones } from 'timezone-support';
 import {hash} from "bcryptjs";
 
+
 interface IUserRequest {
   name: string;
   email: string;
   password: string;
   country: string;
   timezone: string;
-  admin?: boolean;
+  admin: boolean;
   about?: string;
   avatar?: string;
+  startTime: string;
+  endTime: string;
 }
 
 class CreateUserService {
@@ -25,6 +28,8 @@ class CreateUserService {
     admin,
     avatar,
     about,
+    startTime,
+    endTime
   }: IUserRequest) {
 
 
@@ -40,10 +45,6 @@ class CreateUserService {
     // console.log(zonedDate)
 
     const userRepository = getCustomRepository(UsersRepositories);
-
-    if (!email) {
-      throw new Error('email incorrect');
-    }
 
     const userAlreadyExists = await userRepository.findOne({
       email,
@@ -64,11 +65,11 @@ class CreateUserService {
       admin,
       avatar,
       about,
+      startTime,
+      endTime,
     });
 
     await userRepository.save(user)
-
-    //net to save in the database;
 
     return user;
   }

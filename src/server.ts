@@ -5,7 +5,6 @@ import 'express-async-errors';
 import {router} from './routes'
 import cors from 'cors';
 import { errors } from 'celebrate';
-import AppError from './shared/errors/AppError';
 import './database';
 
 const app = express();
@@ -14,19 +13,21 @@ app.use(express.json());
 app.use(router);
 app.use(errors());
 
-// app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
-//   if (err instanceof AppError) {
-//     return response.status(err.statusCode).json({
-//       status: 'error',
-//       message: err.statusCode,
-//     });
-//   }
-//   return response.status(500).json({
-//     status: 'error',
-//     message: 'internal server error',
-//   });
-// });
+app.use(
+  (err: Error, request: Request, response: Response, next: NextFunction) => {
+    if (err instanceof Error) {
+      return response.status(400).json({
+        error: err.message,
+      });
+    }
 
-app.listen(3333, () => {
-  console.log('server is runing');
+    return response.status(500).json({
+      status: "error",
+      message: "Internal Server Error",
+    });
+  }
+);
+
+app.listen(process.env.SERVER_PORT, () => {
+  console.log(`server is runing ${process.env.SERVER_PORT}`);
 });

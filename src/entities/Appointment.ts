@@ -6,8 +6,6 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
-  ManyToMany,
-  JoinTable,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 import { User } from '../entities/User';
@@ -27,7 +25,7 @@ class Appointment {
   @Column()
   student_id: string;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, user => user.student)
   @JoinColumn({ name: 'student_id' }, )
   student: User;
 
